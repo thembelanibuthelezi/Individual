@@ -28,7 +28,7 @@ public class LoginStepDefinition {
     @Given("User is on DemoWEbShop landing page and login button is visible")
     public void User_is_on_DemoWEbShop_landing_page_and_login_button_is_visible(){
         System.out.println("User_is_on_DemoWEbShop_landing_page_and_login_button_is_visible");
-        System.setProperty("web-driver.chrome.driver", "Home/Downloads/Chromedrive_linux64");
+        System.setProperty("web-driver.chrome.driver", "/home/dsf5/Desktop/collaborative project/-DNBAutomationProject-/src/test/java/chromedriver_linux64");
         driver.get("https://demowebshop.tricentis.com/");
 
     }
