@@ -1,17 +1,16 @@
 #SIPHOKAZI
 Feature: Demo Web Shop
-  Background: verify browser
-    Given Verify that User is on the browser
-    When verify if the browser is triggered
-    Then Browser is displayed
 
   Scenario: Home Page Default Login
     Given User is on DemoWEbShop landing page and login button is visible
-    When User login  with <EmailAddress> and <Password>
-    Then Home page is populated "true"
+    When User login  with Thembelani@gmail.com and Admin@123
+    Then Home page is populated and user search for "book"
 
 
-
+  Scenario: Home page purchase item
+    Given Searched product is displayed
+    When User clicks addtocart on the Displayed product
+    Then User open cart
 
 
 
