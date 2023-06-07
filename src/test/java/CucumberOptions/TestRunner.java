@@ -7,9 +7,12 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/java/Features",
         glue = "StepDefinitions"
+
         //dryRun = true
 
 )
+
+
 public class TestRunner extends AbstractTestNGCucumberTests {
 
 

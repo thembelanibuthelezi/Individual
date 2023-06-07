@@ -8,35 +8,39 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 import utils.TestContextSetup;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import static utils.TestContextSetup.*;
 
 public class LoginStepDefinition {
 
-    public  String Cnum;
-    public  String Hname;
-    public  String Exdate;
+    TestContextSetup testContextSetup;
 
-    public  String Exmonth;
 
-    public  String Exyear;
+    public LoginStepDefinition(TestContextSetup testContextSetup){
 
-    public  String Cvv;
-   ChromeDriver driver;
+        this.testContextSetup = testContextSetup;
+    }
+
+
+
 
 
     @Given("User is on DemoWEbShop landing page and login button is visible")
+
     public void User_is_on_DemoWEbShop_landing_page_and_login_button_is_visible() throws InterruptedException {
-        //System.setProperty("web-driver.chrome.driver", "src/test/java/chromedriver_linux64");
-        driver = new ChromeDriver();
 
+        driver = TestContextSetup.getDriver();
         driver.get("https://www.duplichecker.com/credit-card-generator.php");
-        Thread.sleep(2000);
 
-
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         driver.findElement(By.xpath("//*[@id=\"generateCard\"]")).click();
 
@@ -52,38 +56,73 @@ public class LoginStepDefinition {
             Exmonth = "0"+ Exdate.substring(0,1);
         }
 
-        System.out.println( Exyear + "   " +  Exmonth  );
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+        System.out.println( Exyear + "   " +  Exmonth  );
         driver.get("https://demowebshop.tricentis.com");
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
     }
     @When("User login  with {} and {}")
     public void user_Login_With_And(String arg0, String arg1) throws InterruptedException {
-       driver.findElement(By.className("ico-login")).click();
-       driver.findElement(By.id("Email")).sendKeys(arg0);
+        driver.findElement(By.className("ico-login")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-       driver.findElement(By.id("Password")).sendKeys(arg1);
-       driver.findElement(By.xpath("//input[@class='button-1 login-button']")).click();
+        driver.findElement(By.id("Email")).sendKeys(arg0);
 
-        Thread.sleep(2000);
+        driver.findElement(By.id("Password")).sendKeys(arg1);
+        driver.findElement(By.xpath("//input[@class='button-1 login-button']")).click();
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
+
 
 
     }
 
 
 
-    @Then("Home page is populated and user search for {string}")
-    public void homePageIsPopulatedAndUserSearchFor(String arg0) throws InterruptedException {
 
-        driver.findElement(By.xpath("//*[@id='small-searchterms']")).sendKeys(arg0);
-        driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[3]/form/input[2]")).click();
+
+    @Given("Searched product is displayed")
+    public void searchedProductIsDisplayed() {
+
+        driver = TestContextSetup.getDriver();
+
+        System.out.println("ngikhona");
+
+    }
+
+    @When("User clicks addtocart on the Displayed product")
+    public void userClicksAddtocartOnTheDisplayedProduct() throws InterruptedException {
+
+
+        System.out.println(driver.getTitle() +"new");
 
         driver.findElement(By.xpath("//input[@class='button-2 product-box-add-to-cart-button']")).click();
 
+
+
+
+
+    }
+
+    @Then("User open cart")
+    public void userOpenCart() throws InterruptedException {
+
         driver.findElement(By.xpath("//*[@id='topcartlink']")).click();
 
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
 
 
         WebElement dropdown = driver.findElement(By.xpath("//select[@id='CountryId']"));
@@ -98,8 +137,9 @@ public class LoginStepDefinition {
         driver.findElement(By.xpath("//*[@id='checkout']")).click();
 
         driver.findElement(By.xpath("//*[@id='billing-buttons-container']")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        Thread.sleep(2000);
+
 
 
 
@@ -107,30 +147,57 @@ public class LoginStepDefinition {
 
 
 
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
 
 
         driver.findElement(By.xpath("//*[@id=\"shipping-buttons-container\"]/input")).click();
 
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
 
 
         driver.findElement(By.xpath("//*[@id=\"shipping-method-buttons-container\"]/input")).click();
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
         driver.findElement(By.xpath("//*[@id=\"paymentmethod_2\"]")).click();
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
 
         driver.findElement(By.xpath("//*[@id=\"payment-method-buttons-container\"]/input")).click();
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
         driver.findElement(By.xpath("//*[@id=\"CardholderName\"]")).sendKeys(Hname);
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
         driver.findElement(By.xpath("//*[@id=\"CardNumber\"]")).sendKeys(Cnum);
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+
+
 
 
 
@@ -152,47 +219,30 @@ public class LoginStepDefinition {
 
         driver.findElement(By.xpath("//*[@id=\"payment-info-buttons-container\"]/input")).click();
 
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
 
         driver.findElement(By.xpath("//*[@id=\"confirm-order-buttons-container\"]/input")).click();
 
-        Thread.sleep(2000);
-
-        String orderconf =   driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[4]/div/div/div[2]/div")).getText();
-
-        System.out.println(orderconf);
-
-    }
-
-    @Given("Searched product is displayed")
-    public void searchedProductIsDisplayed() {
-
-        //System.out.println(driver.getTitle());
-    }
-
-    @When("User clicks addtocart on the Displayed product")
-    public void userClicksAddtocartOnTheDisplayedProduct() throws InterruptedException {
-
-        System.out.println("ngikhona");
-
-    }
-
-    @Then("User open cart")
-    public void userOpenCart() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
-        //driver.findElement(By.xpath("//input[@class='button-2 product-box-add-to-cart-button']")).click();
 
+        String orderconf = driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[4]/div/div/div[2]/div")).getText();
+
+
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 
 
 
-    private static void wait(ChromeDriver driver){
-        JavascriptExecutor jsEx = (JavascriptExecutor) driver;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(d -> jsEx.executeScript("return document.readyState").equals("complete"));
-    }
+
+
+
+
 
 }
 
