@@ -21,23 +21,12 @@ import static utils.TestContextSetup.*;
 
 public class LoginStepDefinition {
 
-    TestContextSetup testContextSetup;
-
-
-    public LoginStepDefinition(TestContextSetup testContextSetup){
-
-        this.testContextSetup = testContextSetup;
-    }
-
-
-
-
 
     @Given("User is on DemoWEbShop landing page and login button is visible")
 
     public void User_is_on_DemoWEbShop_landing_page_and_login_button_is_visible() throws InterruptedException {
 
-        driver = TestContextSetup.getDriver();
+        driver = getDriver();
         driver.get("https://www.duplichecker.com/credit-card-generator.php");
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -131,6 +120,7 @@ public class LoginStepDefinition {
 
         select.selectByVisibleText("South Africa");
 
+        driver.findElement(By.xpath("//*[@id='ZipPostalCode']")).clear();
 
         driver.findElement(By.xpath("//*[@id='ZipPostalCode']")).sendKeys("4001");
         driver.findElement(By.xpath("//*[@id='termsofservice']")).click();

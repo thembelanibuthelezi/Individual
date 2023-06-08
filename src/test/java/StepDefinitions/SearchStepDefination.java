@@ -14,11 +14,6 @@ import static utils.TestContextSetup.driver;
 
 public class SearchStepDefination {
 
-
-
-
-
-
     @Then("Home page is populated and user search for {string}")
     public void homePageIsPopulatedAndUserSearchFor(String arg0) throws InterruptedException {
 

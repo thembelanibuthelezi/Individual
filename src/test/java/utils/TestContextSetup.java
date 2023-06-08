@@ -28,6 +28,7 @@ public class TestContextSetup {
          System.setProperty("web-driver.chrome.driver", "src/test/java/chromedriver_linux64/chromedriver");
          driver = new ChromeDriver();
       }
+      driver.manage().window().maximize();
       return  driver;
    }
 
